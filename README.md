@@ -5,7 +5,7 @@ Lightweight typeahead / autocomplete component made with [Svelte.js](https://sve
 * can handle asynchronous data
 * use plain lists or key / value pairs
 
-#### [Try the demo](https://svelte-bulma-forms-demo-scrqihjbbl.now.sh)
+#### Try the demo at http://svelte-autocomplete.surge.sh/
 
 ## Install
 
@@ -28,7 +28,7 @@ export default {
 And then use it like so:
 
 ````html
-<AutoComplete name="fruits" items="{fruits}" minChar="2" />
+<AutoComplete class="input" name="fruits" items="{fruits}" minChar="1" />
 
 <AutoComplete name="countries" items="{countries}" isAsync on:input="loadApiData(event)">
   <div class="notification">Loading data from API...</div>
@@ -41,6 +41,7 @@ And then use it like so:
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | name | String | - | Form input name
+| class | String | - | Additional styles for input element
 | items | Array | - | Array with items, can be a plain list or key, value pairs
 | isAsync | Boolean | false | If retrieving API data asynchronously
 | minChar | Number | 2 | Min. characters to type before popup shows
