@@ -1,7 +1,8 @@
-<svelte:window on:click="handleClickOutside(event)" />
+<svelte:window on:click="close()" />
 <div on:click="event.stopPropagation()" class="autocomplete">
   <input 
-    type="text"
+    type="text" 
+    class="{class}"
     {name}
     {placeholder}
     {required}
@@ -13,18 +14,20 @@
     on:focus="fire('focus', event)"
     on:blur="fire('blur', event)"
     on:keydown="onKeyDown(event)"
+    ref:input
   >
   <ul class="autocomplete-results{!isOpen ? ' hide-results' : ''}" ref:list>
-{#if isLoading}
-    <li class="loading">Loading results...</li>
-{:else}
-  {#each suggestions as result, i}
+{#each suggestions as result, i}
     <li on:click="close(i)" class="autocomplete-result{ i === arrowCounter ? ' is-active' : '' }">
     {@html result.label}
     </li>
-  {/each}
-{/if}
+{/each}
   </ul>
+{#if isLoading}
+  <slot>
+    <p class="fallback">Loading data...</p>
+  </slot>
+{/if}
 </div>
 
 <script>
@@ -37,6 +40,7 @@ export default {
   data () {
     return {
       name: '',
+      class: '',
       value: '',
       placeholder: '',
       required: false,
@@ -52,20 +56,25 @@ export default {
 
       // options
       isAsync: false,
-      minChar: 1,
+      minChar: 2,
       maxItems: 10,
       fromStart: true, // Default type ahead
     }
   },
   methods: {
-    onChange (event) {
-      this.fire('input', event)
+    async onChange (event) {
+
+      const { value } = event.target
+      if (value) {
+        this.fire('input', value)
+      }
+
+      const { isAsync, search, minChar } = this.get()
 
       // Is the data given by an outside ajax request?
       if (this.get().isAsync) {
-        this.set({ isLoading: true })
+        this.set({ isLoading: true })        
       } else {
-        const { search, minChar } = this.get()
         if (search.length >= Number(minChar)) {
           this.filterResults()
           this.set({ isOpen: true })
@@ -88,18 +97,15 @@ export default {
         return {
           key: text,
           value: item.value || item,
-          label: search.trim() === '' ? text : text.replace(RegExp(regExpEscape(search.trim()), 'gi'), "<span>$&</span>")
+          label: search.trim() === '' ? text : text.replace(RegExp(regExpEscape(search.trim()), 'i'), "<span>$&</span>")
         }
       })
       this.set({ suggestions })
       const height = suggestions.length > maxItems ? maxItems : suggestions.length
       this.refs.list.style.height = `${height * 2.25}rem`
     },
-    handleClickOutside (event) {
-      this.close()
-    },
     onKeyDown (event) {
-      const { arrowCounter, suggestions } = this.get()
+      let { arrowCounter, suggestions } = this.get()
       if (event.keyCode === 40) {
         // ArrowDown
         if (arrowCounter < suggestions.length) {
@@ -113,6 +119,9 @@ export default {
       } else if (event.keyCode === 13) {
         // Enter
         event.preventDefault()
+        if (arrowCounter === -1) {
+          arrowCounter = 0 // Default select first item of list
+        }
         this.close(arrowCounter)
       } else if (event.keyCode === 27) {
         // Escape
@@ -130,14 +139,17 @@ export default {
         this.set({ value: '', search: '' })
       }
       this.set({ isOpen: false, arrowCounter: -1 })
+      this.refs.input.blur()
     }
   },
   onupdate ({ changed, current, previous }) {
-    if (changed.items && previous && current.items.length !== previous.items.length) {
+    if (this.get().isAsync && changed.items && current.items.length) {
       this.set({
-        results: current.items,
-        isLoading: false
+        items: current.items,
+        isLoading: false,
+        isOpen: true
       })
+      this.filterResults()
     }
   }
 }
