@@ -1,0 +1,46 @@
+{
+  "svelte": "src/index.html",
+  "module": "index.mjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "rollup": "^0.57.1",
+    "rollup-plugin-svelte": "^4.1.0",
+    "svelte": "^1.60.0"
+  },
+  "keywords": [
+    "svelte"
+  ],
+  "files": [
+    "src",
+    "index.mjs",
+    "index.js"
+  ],
+  "name": "svelte-typeahead",
+  "description": "A lightweight typeahead / autcomplete component built with Svelte",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elcobvg/svelte-typeahead.git"
+  },
+  "author": "Elco Brouwer von Gonzenbach <elco.brouwer@gmail.com> (https://github.com/elcobvg)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elcobvg/svelte-typeahead/issues"
+  },
+  "homepage": "https://github.com/elcobvg/svelte-typeahead#readme",
+  "keywords": [
+    "javascript",
+    "svelte",
+    "svelte-components",
+    "autocomplete",
+    "auto complete",
+    "autosuggest",
+    "auto suggest",
+    "typeahead",
+    "type ahead"
+  ]
+}
