@@ -1,14 +1,14 @@
 <svelte:window on:click="close()" />
 <div on:click="event.stopPropagation()" class="autocomplete">
-  <input 
-    type="text" 
+  <input
+    type="text"
     class="{class}"
     {name}
     {placeholder}
     {required}
     {disabled}
     value="{value || ''}"
-    autocomplete="{name}" 
+    autocomplete="{name}"
     bind:value="search"
     on:input="onChange(event)"
     on:focus="fire('focus', event)"
@@ -68,7 +68,7 @@ export default {
 
       // Is the data given by an outside ajax request?
       if (this.get().isAsync) {
-        this.set({ isLoading: true })        
+        this.set({ isLoading: true })
       } else if (search.length >= Number(minChar)) {
         this.filterResults()
         this.set({ isOpen: true })
@@ -80,7 +80,7 @@ export default {
         if (typeof item !== 'string') {
           item = item.key || '' // Silent fail
         }
-        return fromStart ? item.toUpperCase().startsWith(search.toUpperCase()) 
+        return fromStart ? item.toUpperCase().startsWith(search.toUpperCase())
                          : item.toUpperCase().includes(search.toUpperCase())
       })
       .map(item => {
@@ -119,16 +119,16 @@ export default {
       }
     },
     close (index = -1) {
+      this.set({ isOpen: false, arrowCounter: -1 })
+      this.refs.input.blur()
       if (index > -1) {
         const { results } = this.get()
         const { key, value } = results[index]
-        this.fire('change', value)
         this.set({ value, search: key })
+        this.fire('change', value)
       } else if (!this.get().value) {
         this.set({ search: '' })
       }
-      this.set({ isOpen: false, arrowCounter: -1 })
-      this.refs.input.blur()
     }
   },
   onupdate ({ changed, current }) {
