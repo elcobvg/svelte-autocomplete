@@ -7,20 +7,12 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "rollup": "^0.67.4",
-    "rollup-plugin-svelte": "^4.4.0",
-    "svelte": "^2.15.3"
+    "rollup": "^0.57.1",
+    "rollup-plugin-svelte": "^4.1.0",
+    "svelte": "^1.60.0"
   },
   "keywords": [
-    "javascript",
-    "svelte",
-    "svelte-components",
-    "autocomplete",
-    "auto complete",
-    "autosuggest",
-    "auto suggest",
-    "typeahead",
-    "type ahead"
+    "svelte"
   ],
   "files": [
     "src",
@@ -38,5 +30,16 @@
   "bugs": {
     "url": "https://github.com/elcobvg/svelte-autocomplete/issues"
   },
-  "homepage": "https://github.com/elcobvg/svelte-autocomplete#readme"
+  "homepage": "https://github.com/elcobvg/svelte-autocomplete#readme",
+  "keywords": [
+    "javascript",
+    "svelte",
+    "svelte-components",
+    "autocomplete",
+    "auto complete",
+    "autosuggest",
+    "auto suggest",
+    "typeahead",
+    "type ahead"
+  ]
 }
