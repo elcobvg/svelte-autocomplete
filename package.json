@@ -7,30 +7,10 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "rollup": "^0.57.1",
-    "rollup-plugin-svelte": "^4.1.0",
-    "svelte": "^1.60.0"
+    "rollup": "^0.68.2",
+    "rollup-plugin-svelte": "^4.5.0",
+    "svelte": "^2.16.0"
   },
-  "keywords": [
-    "svelte"
-  ],
-  "files": [
-    "src",
-    "dist"
-  ],
-  "name": "svelte-autocomplete",
-  "description": "A lightweight typeahead / autcomplete component built with Svelte",
-  "version": "0.0.2",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/elcobvg/svelte-autocomplete.git"
-  },
-  "author": "Elco Brouwer von Gonzenbach <elco.brouwer@gmail.com> (https://github.com/elcobvg)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/elcobvg/svelte-autocomplete/issues"
-  },
-  "homepage": "https://github.com/elcobvg/svelte-autocomplete#readme",
   "keywords": [
     "javascript",
     "svelte",
@@ -41,5 +21,22 @@
     "auto suggest",
     "typeahead",
     "type ahead"
-  ]
+  ],
+  "files": [
+    "src",
+    "dist"
+  ],
+  "name": "svelte-autocomplete",
+  "description": "A lightweight typeahead / autcomplete component built with Svelte",
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elcobvg/svelte-autocomplete.git"
+  },
+  "author": "Elco Brouwer von Gonzenbach <elco.brouwer@gmail.com> (https://github.com/elcobvg)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elcobvg/svelte-autocomplete/issues"
+  },
+  "homepage": "https://github.com/elcobvg/svelte-autocomplete#readme"
 }
